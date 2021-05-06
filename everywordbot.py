@@ -12,6 +12,8 @@ class EverywordBot(object):
                  dry_run=False):
         self.source_file_name = source_file_name
         self.index_file_name = index_file_name
+        self.prepend_file_name = prepend_file_name
+        self.append_file_name = append_file_name
         self.lat = lat
         self.long = long
         self.place_id = place_id
@@ -36,6 +38,19 @@ class EverywordBot(object):
             index_fh.write("%d" % (index + 1))
             index_fh.close()
 
+    def _prepend_text(self):
+        if not(os.path.isfile(self.prepend_file_name)):
+            return ""
+        with open(self.prepend_file_name) as prepend_fh:
+            return prepend_fh.read().strip() + " "
+
+    def _append_text(self):
+        if not(os.path.isfile(self.append_file_name)):
+            return ""
+        with open(self.append_file_name) as append_fh:
+            return " " + append_fh.read().strip()
+            
+
     def _get_current_line(self, index):
         found = False
         with open(self.source_file_name) as source_fh:
@@ -46,7 +61,8 @@ class EverywordBot(object):
                     break
             if not found:
                 raise EOFError("No more words")
-            return status_str.strip()
+            return_string = _prepend_text() + status_str.strip() + _append_text()
+            return return_string
 
     def _random_point_in(self, bbox):
         """Given a bounding box of (swlat, swlon, nelat, nelon),
@@ -97,6 +113,12 @@ if __name__ == '__main__':
     parser.add_option('--source_file', dest='source_file',
                       default="tweet_list.txt",
                       help="source file (one line per tweet)")
+    parser.add_option('--prepend_file', dest='prepend_file',
+                      default="prepend.txt", 
+                      help="file for word to prepend")
+    parser.add_option('--append_file', dest='append_file',
+                      default="append.txt",
+                      help="file for word to append")
     parser.add_option('--index_file', dest='index_file',
                       default="index",
                       help="index file (must be able to write to this file)")

@@ -16,7 +16,8 @@ Run the script from the command-line like so:
 
 	$ python everywordbot.py --consumer_key=<ckey> --consumer_secret=<csecret> \
 		  --access_token=<atoken> --token_secret=<tokensecret> \
-		  --source_file=<source> --index_file=<index>
+		  --source_file=<source> --index_file=<index> \
+		  --prepend_file=<prepend> --append_file=<append>
 
 ... where:
 
@@ -26,6 +27,8 @@ Run the script from the command-line like so:
 * `<tokensecret>` is the access token secret for the token given above;
 * `<source>` is the filename of a plain text file, with one tweet per line (defaults to `tweet_list.txt` in the current directory); and
 * `<index>` is the name of a file where the script can store the current tweet index (i.e., which line in the file should be tweeted next). The script must be able to write to this file.
+* `<prepend>` (optional) is the name of a plain text file that contains text to prepend to the word
+* `<append>` (optional) is the name of a plain text file that contains text to append to the word
 
 You'll need to arrange to have this script run at some interval, using a tool
 like `cron`. For example, to post a tweet every half hour, you might put the
