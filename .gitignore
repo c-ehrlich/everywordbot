@@ -5,6 +5,8 @@ prepend.txt
 append.txt
 tweet_list.txt
 
+secret/
+
 .idea/
 
 # Created by https://www.gitignore.io/api/macos,linux,django,python,pycharm
