@@ -1,0 +1,1 @@
+python everywordbot.py --consumer_key=x7YaObgcM8N5ByjBqCQ9hpyUB --consumer_secret=xTkapDVpd75isyZBcN7iXgVJEgZLHd09kYpy1IF1RUiE64BGmp --access_token=1390210530175037440-iikZLf8CD0ky8FzGvpkhB3DvYN6E3c --token_secret=mLTDCWZ8msrExlJpBIt3NpxnJ5VBr01Rp2xJEpfXNPeRs --source_file=wordlist.txt --index_file=index.txt --prepend_file=prepend.txt --append_file=append.txt
