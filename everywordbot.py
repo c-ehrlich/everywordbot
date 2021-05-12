@@ -7,6 +7,7 @@ class EverywordBot(object):
     def __init__(self, consumer_key, consumer_secret,
                  access_token, token_secret,
                  source_file_name, index_file_name,
+                prepend_file_name, append_file_name,
                  lat=None, long=None, place_id=None,
                  prefix=None, suffix=None, bbox=None,
                  dry_run=False):
@@ -40,13 +41,13 @@ class EverywordBot(object):
 
     def _prepend_text(self):
         if not(os.path.isfile(self.prepend_file_name)):
-            return ""
+            return 0
         with open(self.prepend_file_name) as prepend_fh:
             return prepend_fh.read().strip() + " "
 
     def _append_text(self):
         if not(os.path.isfile(self.append_file_name)):
-            return ""
+            return 0
         with open(self.append_file_name) as append_fh:
             return " " + append_fh.read().strip()
             
@@ -61,7 +62,7 @@ class EverywordBot(object):
                     break
             if not found:
                 raise EOFError("No more words")
-            return_string = _prepend_text() + status_str.strip() + _append_text()
+            return_string = self._prepend_text() + status_str.strip() + self._append_text()
             return return_string
 
     def _random_point_in(self, bbox):
@@ -148,6 +149,7 @@ if __name__ == '__main__':
     bot = EverywordBot(options.consumer_key, options.consumer_secret,
                        options.access_token, options.token_secret,
                        options.source_file, options.index_file,
+                       options.prepend_file, options.append_file,
                        options.lat, options.long, options.place_id,
                        options.prefix, options.suffix, options.bbox,
                        options.dry_run)
