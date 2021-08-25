@@ -7,6 +7,7 @@ This is a small Python script that implements an [`@everyword`](http://twitter.c
 * Python 2.7+, 3.4+
 * [Tweepy](http://www.tweepy.org/)
 * a plain text file, with each of your desired tweets on one line
+* optional: a plain text file with the string you want to prepend, and/or a plain text file with the string you want to append to each tweet
 
 Instructions
 ------------
